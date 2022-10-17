@@ -1,7 +1,7 @@
 # Twig
 A tiny logging backend for SLF4J
 
-This project came about simply to spite the terribly over-complicated logging libraries like Log4J
+This project came about simply to spite the terribly over-complicated logging libraries like Log4J,
 logback, or whatever floats your goat.
 
 Stuff Twig Does:
@@ -11,9 +11,10 @@ Stuff Twig Does:
 * Multiple output-streams
 
 Stuff Twig Doesn't Do:
-* Make your brain hurt
-* Complain
-
+* Give you up
+* Let you down
+* Run around
+* Desert you
 
 ### Basic Setup
 ```java
