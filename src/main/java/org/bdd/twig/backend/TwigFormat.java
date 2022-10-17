@@ -1,11 +1,11 @@
-package org.bdd.twig.format;
+package org.bdd.twig.backend;
 
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import org.bdd.twig.TwigConfig;
-import org.bdd.twig.TwigConfig.Level;
+import org.bdd.twig.Twig;
+import org.bdd.twig.Twig.Level;
 
 public class TwigFormat
 {
@@ -132,7 +132,7 @@ public class TwigFormat
     {
         msgWrap.value = msg;
         nameWrap.value = loggerName;
-        levelWrap.value = TwigConfig.getLevelStr(level);
+        levelWrap.value = Twig.getLevelStr(level);
 
         switch(level)
         {

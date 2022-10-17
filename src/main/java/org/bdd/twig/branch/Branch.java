@@ -1,6 +1,6 @@
 package org.bdd.twig.branch;
 
-import org.bdd.twig.format.TwigFormat;
+import org.bdd.twig.backend.TwigFormat;
 
 public abstract class Branch
 {

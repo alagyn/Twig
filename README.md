@@ -18,8 +18,8 @@ Stuff Twig Doesn't Do:
 
 ### Basic Setup
 ```java
-import org.bdd.twig.TwigConfig;
-import org.bdd.twig.TwigConfig.Level;
+import org.bdd.twig.Twig;
+import org.bdd.twig.Twig.Level;
 import org.bdd.twig.branch.Branch;
 import org.bdd.twig.branch.StreamBranch;
 import org.slf4j.Logger;
@@ -39,9 +39,9 @@ public class TestLog
         // Create a branch
         Branch b = new StreamBranch(System.out, format);
         // Add it to the TwigConfig
-        TwigConfig.addBranch(b);
+        Twig.addBranch(b);
         // Set the global level
-        TwigConfig.setLevel(Level.Trace);
+        Twig.setLevel(Level.Trace);
 
         log.trace("This is a trace");
         log.debug("This is a debug");

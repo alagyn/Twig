@@ -1,7 +1,8 @@
 package org.bdd;
 
-import org.bdd.twig.TwigConfig;
-import org.bdd.twig.TwigConfig.Level;
+import org.bdd.twig.Twig;
+import org.bdd.twig.Twig.Level;
+import org.bdd.twig.backend.TwigLogger;
 import org.bdd.twig.branch.Branch;
 import org.bdd.twig.branch.StreamBranch;
 import org.slf4j.Logger;
@@ -29,9 +30,9 @@ public class TestLog
     {
         Logger log = LoggerFactory.getLogger("testLogger");
 
-        if(!log.getClass().getName().equals("org.bdd.twig.Twig"))
+        if(!log.getClass().getName().equals(TwigLogger.class.getName()))
         {
-            throw new RuntimeException();
+            throw new RuntimeException("Didn't load the TwigLogger, loaded " + log.getClass().getName());
         }
 
         log.info("This should not output");
@@ -39,8 +40,8 @@ public class TestLog
         String format = "{event.time} [{color.level}{event.level}{color.end}] {event.message}\n";
         Branch b = new StreamBranch(System.out, format);
 
-        TwigConfig.addBranch(b);
-        TwigConfig.setLevel(Level.Trace);
+        Twig.addBranch(b);
+        Twig.setLevel(Level.Trace);
 
         log.trace("This is a trace");
         log.debug("This is a debug");

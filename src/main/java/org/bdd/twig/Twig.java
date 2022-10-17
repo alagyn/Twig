@@ -1,419 +1,62 @@
 package org.bdd.twig;
 
-import org.bdd.twig.TwigConfig.Level;
-import org.slf4j.Logger;
-import org.slf4j.Marker;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class Twig implements Logger
+import org.bdd.twig.branch.Branch;
+
+public class Twig
 {
-    public final String name;
-
-    public Twig(String name)
-    {
-        this.name = name;
-    }
-
-    @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    // TODO markers?
-
-    private void log(Level level, String format, Object[] objs)
-    {
-        TwigWriter.output(name, level, format, objs);
-    }
-
-    private void log(Level level, String format, Object arg0, Object arg1)
-    {
-        TwigWriter.output(name, level, format, arg0, arg1);
-    }
-
-    private void log(Level level, String format, Object arg0)
-    {
-        TwigWriter.output(name, level, format, arg0);
-    }
-
-    private void log(Level level, String format, Throwable arg0)
-    {
-        TwigWriter.output(name, level, format, arg0);
-    }
-
-    private void log(Level level, String msg)
-    {
-        TwigWriter.output(name, level, msg);
-    }
-
-    // #region Debug
-    @Override
-    public void debug(String arg0)
-    {
-        log(Level.Debug, arg0);
-    }
-
-    @Override
-    public void debug(String arg0, Object arg1)
-    {
-        log(Level.Debug, arg0, arg1);
-    }
-
-    @Override
-    public void debug(String arg0, Object... arg1)
-    {
-        log(Level.Debug, arg0, arg1);
-    }
-
-    @Override
-    public void debug(String arg0, Throwable arg1)
-    {
-        log(Level.Debug, arg0, arg1);
-    }
-
-    @Override
-    public void debug(Marker arg0, String arg1)
-    {
-        log(Level.Debug, arg1);
-    }
-
-    @Override
-    public void debug(String arg0, Object arg1, Object arg2)
-    {
-        log(Level.Debug, arg0, arg1, arg2);
-    }
-
-    @Override
-    public void debug(Marker arg0, String arg1, Object arg2)
-    {
-        log(Level.Debug, arg1, arg2);
-    }
-
-    @Override
-    public void debug(Marker arg0, String arg1, Object... arg2)
-    {
-        log(Level.Debug, arg1, arg2);
-    }
-
-    @Override
-    public void debug(Marker arg0, String arg1, Throwable arg2)
-    {
-        log(Level.Debug, arg1, arg2);
-    }
-
-    @Override
-    public void debug(Marker arg0, String arg1, Object arg2, Object arg3)
-    {
-        log(Level.Debug, arg1, arg2, arg3);
-    }
-
-    @Override
-    public boolean isDebugEnabled()
-    {
-        return TwigConfig.checkLevel(Level.Debug);
-    }
-
-    @Override
-    public boolean isDebugEnabled(Marker arg0)
-    {
-        return TwigConfig.checkLevel(Level.Debug);
-    }
-    // #endregion
-
-    // #region Error
-    @Override
-    public void error(String arg0)
-    {
-        log(Level.Error, arg0);
-    }
-
-    @Override
-    public void error(String arg0, Object arg1)
-    {
-        log(Level.Error, arg0, arg1);
-    }
-
-    @Override
-    public void error(String arg0, Object... arg1)
-    {
-        log(Level.Error, arg0, arg1);
-    }
-
-    @Override
-    public void error(String arg0, Throwable arg1)
-    {
-        log(Level.Error, arg0, arg1);
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1)
-    {
-        log(Level.Error, arg1);
-    }
-
-    @Override
-    public void error(String arg0, Object arg1, Object arg2)
-    {
-        log(Level.Error, arg0, arg1, arg2);
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Object arg2)
-    {
-        log(Level.Error, arg1, arg2);
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Object... arg2)
-    {
-        log(Level.Error, arg1, arg2);
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Throwable arg2)
-    {
-        log(Level.Error, arg1, arg2);
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Object arg2, Object arg3)
-    {
-        log(Level.Error, arg1, arg2, arg3);
-    }
-
-    @Override
-    public boolean isErrorEnabled()
-    {
-        return TwigConfig.checkLevel(Level.Error);
-    }
-
-    @Override
-    public boolean isErrorEnabled(Marker arg0)
-    {
-        return TwigConfig.checkLevel(Level.Error);
-    }
-    // #endregion Error
-
-    // #region Info
-    @Override
-    public void info(String arg0)
-    {
-        log(Level.Info, arg0);
-    }
-
-    @Override
-    public void info(String arg0, Object arg1)
-    {
-        log(Level.Info, arg0, arg1);
-    }
-
-    @Override
-    public void info(String arg0, Object... arg1)
-    {
-        log(Level.Info, arg0, arg1);
-    }
-
-    @Override
-    public void info(String arg0, Throwable arg1)
-    {
-        log(Level.Info, arg0, arg1);
-    }
-
-    @Override
-    public void info(Marker arg0, String arg1)
-    {
-        log(Level.Info, arg1);
-    }
-
-    @Override
-    public void info(String arg0, Object arg1, Object arg2)
-    {
-        log(Level.Info, arg0, arg1, arg2);
-    }
-
-    @Override
-    public void info(Marker arg0, String arg1, Object arg2)
-    {
-        log(Level.Info, arg1, arg2);
-    }
-
-    @Override
-    public void info(Marker arg0, String arg1, Object... arg2)
-    {
-        log(Level.Info, arg1, arg2);
-    }
-
-    @Override
-    public void info(Marker arg0, String arg1, Throwable arg2)
-    {
-        log(Level.Info, arg1, arg2);
-    }
-
-    @Override
-    public void info(Marker arg0, String arg1, Object arg2, Object arg3)
-    {
-        log(Level.Info, arg1, arg2, arg3);
-    }
-
-    @Override
-    public boolean isInfoEnabled()
-    {
-        return TwigConfig.checkLevel(Level.Info);
-    }
-
-    @Override
-    public boolean isInfoEnabled(Marker arg0)
-    {
-        return TwigConfig.checkLevel(Level.Info);
-    }
-    // #endregion Info
-
-    // #region Trace
-    @Override
-    public void trace(String arg0)
-    {
-        log(Level.Trace, arg0);
-    }
-
-    @Override
-    public void trace(String arg0, Object arg1)
-    {
-        log(Level.Trace, arg0, arg1);
-    }
-
-    @Override
-    public void trace(String arg0, Object... arg1)
-    {
-        log(Level.Trace, arg0, arg1);
-    }
-
-    @Override
-    public void trace(String arg0, Throwable arg1)
-    {
-        log(Level.Trace, arg0, arg1);
-    }
-
-    @Override
-    public void trace(Marker arg0, String arg1)
-    {
-        log(Level.Trace, arg1);
-    }
-
-    @Override
-    public void trace(String arg0, Object arg1, Object arg2)
-    {
-        log(Level.Trace, arg0, arg1, arg2);
-    }
-
-    @Override
-    public void trace(Marker arg0, String arg1, Object arg2)
-    {
-        log(Level.Trace, arg1, arg2);
-    }
-
-    @Override
-    public void trace(Marker arg0, String arg1, Object... arg2)
-    {
-        log(Level.Trace, arg1, arg2);
-    }
-
-    @Override
-    public void trace(Marker arg0, String arg1, Throwable arg2)
-    {
-        log(Level.Trace, arg1, arg2);
-    }
-
-    @Override
-    public void trace(Marker arg0, String arg1, Object arg2, Object arg3)
-    {
-        log(Level.Trace, arg1, arg2, arg3);
-    }
-
-    @Override
-    public boolean isTraceEnabled()
-    {
-        return TwigConfig.checkLevel(Level.Trace);
-    }
-
-    @Override
-    public boolean isTraceEnabled(Marker arg0)
-    {
-        return TwigConfig.checkLevel(Level.Trace);
-    }
-
-    // #endregion Trace
-
-    // #region Warn
-    @Override
-    public void warn(String arg0)
-    {
-        log(Level.Warn, arg0);
-    }
-
-    @Override
-    public void warn(String arg0, Object arg1)
+    public static enum Level
     {
-        log(Level.Warn, arg0, arg1);
+        Trace, Debug, Info, Warn, Error;
     }
 
-    @Override
-    public void warn(String arg0, Object... arg1)
-    {
-        log(Level.Warn, arg0, arg1);
-    }
+    private static Level loglevel = Level.Info;
+    private static ArrayList<Branch> branches = new ArrayList<>();
 
-    @Override
-    public void warn(String arg0, Throwable arg1)
+    public static Level getLevel()
     {
-        log(Level.Warn, arg0, arg1);
+        return loglevel;
     }
 
-    @Override
-    public void warn(Marker arg0, String arg1)
+    public static void setLevel(Level level)
     {
-        log(Level.Warn, arg1);
+        loglevel = level;
     }
 
-    @Override
-    public void warn(String arg0, Object arg1, Object arg2)
+    public static String getLevelStr(Level level)
     {
-        log(Level.Warn, arg0, arg1, arg2);
+        switch(level)
+        {
+        case Info:
+            return "Info ";
+        case Warn:
+            return "Warn ";
+        default:
+            return level.toString();
+        }
     }
 
-    @Override
-    public void warn(Marker arg0, String arg1, Object arg2)
+    private Twig()
     {
-        log(Level.Warn, arg1, arg2);
-    }
 
-    @Override
-    public void warn(Marker arg0, String arg1, Object... arg2)
-    {
-        log(Level.Warn, arg1, arg2);
     }
 
-    @Override
-    public void warn(Marker arg0, String arg1, Throwable arg2)
+    public static void addBranch(Branch... branch)
     {
-        log(Level.Warn, arg1, arg2);
+        branches.addAll(Arrays.asList(branch));
     }
 
-    @Override
-    public void warn(Marker arg0, String arg1, Object arg2, Object arg3)
+    public static boolean checkLevel(Level l)
     {
-        log(Level.Warn, arg1, arg2, arg3);
+        return l.compareTo(loglevel) >= 0;
     }
 
-    @Override
-    public boolean isWarnEnabled()
+    public static List<Branch> getBranches()
     {
-        return TwigConfig.checkLevel(Level.Warn);
+        return branches;
     }
 
-    @Override
-    public boolean isWarnEnabled(Marker arg0)
-    {
-        return TwigConfig.checkLevel(Level.Warn);
-    }
-    // #endregion Warn
 }

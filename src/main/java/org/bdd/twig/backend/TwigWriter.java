@@ -1,10 +1,11 @@
-package org.bdd.twig;
+package org.bdd.twig.backend;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.time.OffsetDateTime;
 
-import org.bdd.twig.TwigConfig.Level;
+import org.bdd.twig.Twig;
+import org.bdd.twig.Twig.Level;
 import org.bdd.twig.branch.Branch;
 
 public class TwigWriter
@@ -12,7 +13,7 @@ public class TwigWriter
 
     public static void output(String name, Level level, String msg)
     {
-        if(TwigConfig.checkLevel(level))
+        if(Twig.checkLevel(level))
         {
             finalOutput(name, level, msg);
         }
@@ -20,7 +21,7 @@ public class TwigWriter
 
     public static void output(String name, Level level, String format, Object arg0)
     {
-        if(TwigConfig.checkLevel(level))
+        if(Twig.checkLevel(level))
         {
             String[] values = format.split("\\{\\}", 2);
             if(values.length == 1)
@@ -47,7 +48,7 @@ public class TwigWriter
 
     public static void output(String name, Level level, String format, Object arg0, Object arg1)
     {
-        if(TwigConfig.checkLevel(level))
+        if(Twig.checkLevel(level))
         {
             String[] values = format.split("\\{\\}", 3);
 
@@ -94,7 +95,7 @@ public class TwigWriter
      */
     public static void output(String name, Level level, String format, Object[] objs)
     {
-        if(TwigConfig.checkLevel(level))
+        if(Twig.checkLevel(level))
         {
             char[] rawfmt = format.toCharArray();
             StringBuilder out = new StringBuilder();
@@ -138,7 +139,7 @@ public class TwigWriter
 
     public static void output(String name, Level level, String format, Throwable arg0)
     {
-        if(TwigConfig.checkLevel(level))
+        if(Twig.checkLevel(level))
         {
             StringBuilder out = new StringBuilder();
             StringWriter sw = new StringWriter();
@@ -163,7 +164,7 @@ public class TwigWriter
     {
         OffsetDateTime now = OffsetDateTime.now();
 
-        for(Branch branch : TwigConfig.getBranches())
+        for(Branch branch : Twig.getBranches())
         {
             String formatted = branch.getFormat().format(name, level, now, msg);
             synchronized(branch)
@@ -175,7 +176,7 @@ public class TwigWriter
 
     protected static void flush()
     {
-        for(Branch branch : TwigConfig.getBranches())
+        for(Branch branch : Twig.getBranches())
         {
             synchronized(branch)
             {
