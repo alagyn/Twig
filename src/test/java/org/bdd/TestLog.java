@@ -19,6 +19,11 @@ public class TestLog
             this.msg = msg;
         }
 
+        public static void fail()
+        {
+            throw new RuntimeException("this is a potato message");
+        }
+
         @Override
         public String toString()
         {
@@ -37,7 +42,7 @@ public class TestLog
 
         log.info("This should not output");
 
-        String format = "{event.time} [{color.level}{event.level}{color.end}] {event.message}\n";
+        String format = "{event.time} [{color.level}{event.level}{color.end}] {event.name}: {event.message}\n";
         Branch b = new StreamBranch(System.out, format);
 
         Twig.addBranch(b);
@@ -58,5 +63,16 @@ public class TestLog
                 new TestObj("once"));
 
         log.info("This is {} {} {} {}", new TestObj("many"), new TestObj("things"), new TestObj("at"));
+
+        log.error("This is a throwable", new RuntimeException("This is a message"));
+
+        try
+        {
+            TestObj.fail();
+        }
+        catch(RuntimeException err)
+        {
+            log.warn("What's all this then", err);
+        }
     }
 }

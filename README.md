@@ -35,7 +35,7 @@ public class TestLog
         log.info("This should not output, no branches have been added");
 
         // Setup a custom format
-        String format = "{event.time} [{color.level}{event.level}{color.end}] {event.message}\n";
+        String format = "{event.time} [{color.level}{event.level}{color.end}] {event.name}: {event.message}\n";
         // Create a branch
         Branch b = new StreamBranch(System.out, format);
         // Add it to the TwigConfig

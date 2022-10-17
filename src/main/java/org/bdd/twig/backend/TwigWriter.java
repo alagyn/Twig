@@ -145,7 +145,7 @@ public class TwigWriter
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             arg0.printStackTrace(pw);
-            out.append(format);
+            out.append(format).append("\n");
             out.append(sw.toString());
             out.append(arg0.getMessage());
 
