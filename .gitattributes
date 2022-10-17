@@ -1,0 +1,20 @@
+# Default behavior
+* text eol=lf
+
+
+*.md text
+*.py text
+*.txt text
+*.sh text
+*.c text
+*.cpp text
+*.h text
+*.hpp text
+*.json text
+*.cfg text
+*.java text
+
+*.jpeg binary
+*.whl binary
+*.PNG binary
+*.tflite binary
