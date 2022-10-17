@@ -9,6 +9,22 @@ import org.slf4j.LoggerFactory;
 
 public class TestLog
 {
+    private static class TestObj
+    {
+        public final String msg;
+
+        public TestObj(String msg)
+        {
+            this.msg = msg;
+        }
+
+        @Override
+        public String toString()
+        {
+            return this.msg;
+        }
+    }
+
     public static void main(String[] args)
     {
         Logger log = LoggerFactory.getLogger("testLogger");
@@ -32,5 +48,14 @@ public class TestLog
         log.warn("This is a warn");
         log.error("This is an error");
 
+        log.info("This is an {}", "Insert");
+        log.info("This is not {} {}", new TestObj("looking"), new TestObj("bad"));
+        log.info("This is {} {} {} {}", new TestObj("many"), new TestObj("things"), new TestObj("at"),
+                new TestObj("once"));
+
+        log.info("This is {} {} {} end", new TestObj("many"), new TestObj("things"), new TestObj("at"),
+                new TestObj("once"));
+
+        log.info("This is {} {} {} {}", new TestObj("many"), new TestObj("things"), new TestObj("at"));
     }
 }

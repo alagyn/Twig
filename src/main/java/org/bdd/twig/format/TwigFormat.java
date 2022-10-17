@@ -10,6 +10,7 @@ import org.bdd.twig.TwigConfig.Level;
 public class TwigFormat
 {
     public static final String DEFAULT_FORMAT = "[{event.level}] {event.message}\n";
+    public static final String DEFAULT_TIME_FORMAT = "dd-MM-yyyy kk:mm:ss";
 
     private static final String COLOR_BASE_TAG = "color", EVENT_BASE_TAG = "event";
 
@@ -103,7 +104,7 @@ public class TwigFormat
     private StringWrap levelColorWrap = new StringWrap(WRAP_LVL_C);
     private StringWrap timeWrap = new StringWrap(WRAP_TIME);
 
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT);
 
     private ArrayList<FmtObj> format;
 
