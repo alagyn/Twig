@@ -5,7 +5,7 @@
 
   <groupId>org.bdd</groupId>
   <artifactId>twig</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.3</version>
 
   <name>Twig</name>
   <!-- FIXME change it to the project's website -->

@@ -15,6 +15,7 @@ public class Twig
 
     private static Level loglevel = Level.Info;
     private static ArrayList<Branch> branches = new ArrayList<>();
+    private static ArrayList<String> blocked = new ArrayList<>();
 
     public static Level getLevel()
     {
@@ -57,6 +58,16 @@ public class Twig
     public static List<Branch> getBranches()
     {
         return branches;
+    }
+
+    public static void addBlock(String name)
+    {
+        blocked.add(name);
+    }
+
+    public static List<String> getBlocks()
+    {
+        return blocked;
     }
 
 }

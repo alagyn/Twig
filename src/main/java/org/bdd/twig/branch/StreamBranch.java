@@ -41,6 +41,7 @@ public class StreamBranch extends Branch
         try
         {
             os.write(msg);
+            os.flush();
         }
         catch(IOException err)
         {

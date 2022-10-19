@@ -1,10 +1,6 @@
 package org.bdd;
 
-import org.bdd.twig.Twig;
-import org.bdd.twig.Twig.Level;
 import org.bdd.twig.backend.TwigLogger;
-import org.bdd.twig.branch.Branch;
-import org.bdd.twig.branch.StreamBranch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,14 +36,6 @@ public class TestLog
             throw new RuntimeException("Didn't load the TwigLogger, loaded " + log.getClass().getName());
         }
 
-        log.info("This should not output");
-
-        String format = "{event.time} [{color.level}{event.level}{color.end}] {event.name}: {event.message}\n";
-        Branch b = new StreamBranch(System.out, format);
-
-        Twig.addBranch(b);
-        Twig.setLevel(Level.Trace);
-
         log.trace("This is a trace");
         log.debug("This is a debug");
         log.info("This is an info");
@@ -74,5 +62,11 @@ public class TestLog
         {
             log.warn("What's all this then", err);
         }
+
+        Logger blocked = LoggerFactory.getLogger("blockedLog.asdf");
+        blocked.info("This should not print");
+        log.info("This should be fine");
+
+        log.info("Hmmmmmm");
     }
 }
