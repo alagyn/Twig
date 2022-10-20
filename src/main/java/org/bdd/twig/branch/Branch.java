@@ -11,6 +11,11 @@ public abstract class Branch
         this.format.setFormat(format);
     }
 
+    public void setTimeFormat(String format)
+    {
+        this.format.setTimeFormat(format);
+    }
+
     public Branch(String format)
     {
         this.format = new TwigFormat(format);
