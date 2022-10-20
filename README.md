@@ -61,7 +61,7 @@ since we cannot guarantee when these will be instantiated (most likely *before* 
 Therefore, the optimal solution is to create a TwigConfig Service Provider.
 This is done in two steps:
 1. Create a class that implements the `org.bdd.twig.TwigConfig` interface.
-    This interface provides a single function `void config()` that is guarenteed to be called
+    This interface provides a single function `void config()` that is guaranteed to be called
     before any loggers are created.
     ```java
     public class TestConfig implements TwigConfig
@@ -95,8 +95,9 @@ Formatting, however, is typically handled on a per-branch basis so that you can 
 
 ### Format Strings
 
-Twig format string variables are surrounded with curly bracketsn and contain a category and a key.  
- E.G. `"{event.message}"`  category = "event", key = "message"
+Twig format string variables are surrounded with curly brackets and contain a category and a key.  
+ E.G. `"{event.message}"`  category = "event", key = "message"  
+ Curly brackets are therefore **invalid** in any other case.
 
 ### Available format variables
 
