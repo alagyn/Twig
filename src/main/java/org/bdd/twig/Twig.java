@@ -27,6 +27,30 @@ public class Twig
         loglevel = level;
     }
 
+    public static void setLevel(String level)
+    {
+        switch(level.toLowerCase())
+        {
+        case "trace":
+            setLevel(Level.Trace);
+            break;
+        case "debug":
+            setLevel(Level.Debug);
+            break;
+        case "info":
+            setLevel(Level.Info);
+            break;
+        case "warn":
+            setLevel(Level.Warn);
+            break;
+        case "error":
+            setLevel(Level.Error);
+            break;
+        default:
+            throw new IllegalArgumentException("Twig::setLevel() Invalid level string: \"" + level + "\"");
+        }
+    }
+
     public static String getLevelStr(Level level)
     {
         switch(level)
