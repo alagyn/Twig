@@ -126,7 +126,7 @@ b.setTimeFormat("dd-MM-yyyy kk:mm:ss");
 Twig.addBranch(b);
 ```
 
-### Logger Name Formatting
+### Logger Name Formatting (Global Config)
 The typical paradigm for Java logger names is to use the full class name.  
 E.G. `org.bdd.testPackage.TestClass` via
 ```java
