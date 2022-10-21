@@ -140,6 +140,20 @@ Twig.setNameMode(NameMode.ShortPath)
 ```
 This defaults to the `ClassName` mode.
 
-`ClassName`: Print only the classname, E.G. `TestClass`
-`ShortPath`: Shorten each package name to its first letter, E.G. `o.b.t.TestClass`
-`None`: User the full name as-is
+* `ClassName`: Print only the classname  
+ E.G. `TestClass`
+* `ShortPath`: Shorten each package name to its first letter  
+ E.G. `o.b.t.TestClass`
+* `None`: User the full name as-is  
+E.G. `org.bdd.twig.TestClass`
+
+You can also configure the alignment of logger names with:
+```java
+Twig.setNameAlign(NameAlign.Center);
+```
+Names will be padded to fit in the space taken by the longest logger name that has been created.
+This defaults to the `Center` mode.
+
+Options: `Left`, `Right`, `Center`, `None`  
+Setting the alignment to `None` disables padding
+

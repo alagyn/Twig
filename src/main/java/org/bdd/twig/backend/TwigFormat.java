@@ -22,15 +22,11 @@ public class TwigFormat
     private static final String COLOR_END = "\033[0m", COLOR_RED = "\033[31m", COLOR_GRN = "\033[32m",
             COLOR_BLU = "\033[34m", COLOR_YLW = "\033[33m", COLOR_CYAN = "\033[36m";
 
-    private static class StringWrap
-    {
-        public String value = "";
-        public final String name;
+    private static int longestName = 0;
 
-        public StringWrap(String name)
-        {
-            this.name = name;
-        }
+    public static void updateLongestName(int len)
+    {
+        longestName = Math.max(len, longestName);
     }
 
     private static interface FmtObj
@@ -76,40 +72,39 @@ public class TwigFormat
 
     private static class FmtWrap implements FmtObj
     {
-        public final StringWrap wrapper;
+        public String value = "";
 
-        public FmtWrap(StringWrap wrap)
+        public FmtWrap()
         {
-            this.wrapper = wrap;
         }
 
         @Override
         public String get()
         {
-            return wrapper.value;
+            return value;
         }
 
         @Override
         public String toString()
         {
-            return "FmtWrap: " + wrapper.name;
+            return "FmtWrap";
         }
     }
 
-    private static final String WRAP_MSG = "event.message", WRAP_NAME = "event.name", WRAP_LVL = "event.level",
-            WRAP_LVL_C = "color.level", WRAP_TIME = "event.time";
-    private StringWrap msgWrap = new StringWrap(WRAP_MSG);
-    private StringWrap nameWrap = new StringWrap(WRAP_NAME);
-    private StringWrap levelWrap = new StringWrap(WRAP_LVL);
-    private StringWrap levelColorWrap = new StringWrap(WRAP_LVL_C);
-    private StringWrap timeWrap = new StringWrap(WRAP_TIME);
+    private FmtWrap msgWrap = new FmtWrap();
+    private FmtWrap nameWrap = null;
+    private FmtWrap levelWrap = null;
+    private FmtWrap levelColorWrap = null;
+    private FmtWrap timeWrap = null;
 
     private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(DEFAULT_TIME_FORMAT);
 
     private ArrayList<FmtObj> format;
+    private String formatString;
 
     public TwigFormat(String format)
     {
+        formatString = format;
         compile(format);
     }
 
@@ -128,33 +123,128 @@ public class TwigFormat
         timeFormatter = DateTimeFormatter.ofPattern(format);
     }
 
+    private static String alignCenter(String in)
+    {
+        int diff = longestName - in.length();
+        if(diff == 0)
+        {
+            return in;
+        }
+
+        StringBuilder out = new StringBuilder();
+
+        int leftPad = (longestName - in.length()) / 2;
+        for(int i = 0; i < leftPad; ++i)
+        {
+            out.append(' ');
+        }
+
+        out.append(in);
+
+        int rightPad = leftPad + (diff % 2);
+        for(int i = 0; i < rightPad; ++i)
+        {
+            out.append(' ');
+        }
+
+        return out.toString();
+    }
+
+    private static String alignLeft(String in)
+    {
+        int diff = longestName - in.length();
+        if(diff == 0)
+        {
+            return in;
+        }
+
+        StringBuilder out = new StringBuilder();
+
+        out.append(in);
+
+        for(int i = 0; i < diff; ++i)
+        {
+            out.append(' ');
+        }
+
+        return out.toString();
+    }
+
+    private static String alignRight(String in)
+    {
+        int diff = longestName - in.length();
+        if(diff == 0)
+        {
+            return in;
+        }
+
+        StringBuilder out = new StringBuilder();
+
+        for(int i = 0; i < diff; ++i)
+        {
+            out.append(' ');
+        }
+
+        return out.append(in).toString();
+    }
+
     public String format(String loggerName, Level level, OffsetDateTime now, String msg)
     {
         msgWrap.value = msg;
-        nameWrap.value = loggerName;
-        levelWrap.value = Twig.getLevelStr(level);
 
-        switch(level)
+        if(nameWrap != null)
         {
-        case Trace:
-            levelColorWrap.value = COLOR_CYAN;
-            break;
-        case Debug:
-            levelColorWrap.value = COLOR_GRN;
-            break;
-        case Warn:
-            levelColorWrap.value = COLOR_YLW;
-            break;
-        case Error:
-            levelColorWrap.value = COLOR_RED;
-            break;
-        case Info:
-        default:
-            levelColorWrap.value = "";
-            break;
+            switch(Twig.getNameAlign())
+            {
+            case Left:
+                nameWrap.value = alignLeft(loggerName);
+                break;
+            case Right:
+                nameWrap.value = alignRight(loggerName);
+                break;
+            case Center:
+                nameWrap.value = alignCenter(loggerName);
+                break;
+            case None:
+            default:
+                nameWrap.value = loggerName;
+                break;
+            }
+
         }
 
-        timeWrap.value = timeFormatter.format(now);
+        if(levelWrap != null)
+        {
+            levelWrap.value = Twig.getLevelStr(level);
+        }
+
+        if(levelColorWrap != null)
+        {
+            switch(level)
+            {
+            case Trace:
+                levelColorWrap.value = COLOR_CYAN;
+                break;
+            case Debug:
+                levelColorWrap.value = COLOR_GRN;
+                break;
+            case Warn:
+                levelColorWrap.value = COLOR_YLW;
+                break;
+            case Error:
+                levelColorWrap.value = COLOR_RED;
+                break;
+            case Info:
+            default:
+                levelColorWrap.value = "";
+                break;
+            }
+        }
+
+        if(timeWrap != null)
+        {
+            timeWrap.value = timeFormatter.format(now);
+        }
 
         StringBuilder out = new StringBuilder();
         for(FmtObj obj : format)
@@ -257,13 +347,26 @@ public class TwigFormat
         switch(key)
         {
         case NAME_TAG:
-            return new FmtWrap(nameWrap);
+            if(nameWrap == null)
+            {
+                nameWrap = new FmtWrap();
+            }
+            return nameWrap;
+
         case LEVEL_TAG:
-            return new FmtWrap(levelWrap);
+            if(levelWrap == null)
+            {
+                levelWrap = new FmtWrap();
+            }
+            return levelWrap;
         case TIME_TAG:
-            return new FmtWrap(timeWrap);
+            if(timeWrap == null)
+            {
+                timeWrap = new FmtWrap();
+            }
+            return timeWrap;
         case MSG_TAG:
-            return new FmtWrap(msgWrap);
+            return msgWrap;
         default:
             throw new RuntimeException("Twig: Unknown format key: \"" + key + "\"");
         }
@@ -274,7 +377,11 @@ public class TwigFormat
         switch(key)
         {
         case LEVEL_TAG:
-            return new FmtWrap(levelColorWrap);
+            if(levelColorWrap == null)
+            {
+                levelColorWrap = new FmtWrap();
+            }
+            return levelColorWrap;
         case COLOR_END_TAG:
             return new FmtColor(COLOR_END);
         case COLOR_RED_TAG:
@@ -290,5 +397,10 @@ public class TwigFormat
         default:
             throw new RuntimeException("Twig: Unknown color tag: \"" + key + "\"");
         }
+    }
+
+    public String toString()
+    {
+        return new StringBuilder().append("TwigFormat: \"").append(formatString).append("\"").toString();
     }
 }

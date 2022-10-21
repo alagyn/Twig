@@ -12,6 +12,7 @@ public class TwigLogger implements Logger
     public TwigLogger(String name)
     {
         this.name = name;
+        TwigFormat.updateLongestName(name.length());
     }
 
     @Override

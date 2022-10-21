@@ -10,7 +10,6 @@ import org.bdd.twig.branch.Branch;
 
 public class TwigWriter
 {
-
     public static void output(String name, Level level, String msg)
     {
         if(Twig.checkLevel(level))

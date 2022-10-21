@@ -68,5 +68,12 @@ public class TestLog
         log.info("This should be fine");
 
         log.info("Hmmmmmm");
+
+        Logger longer = LoggerFactory.getLogger("org.bdd.ThisIsAReallyLongClass");
+        longer.info("Hey look at me");
+
+        log.info("Wow everything is different now");
+        log.warn("Wait how do we go back");
+        longer.debug("You can't");
     }
 }

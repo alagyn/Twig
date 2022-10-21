@@ -18,8 +18,14 @@ public class Twig
         ClassName, ShortPath, None;
     }
 
+    public static enum NameAlign
+    {
+        Center, Left, Right, None;
+    }
+
     private static Level loglevel = Level.Info;
     private static NameMode nameMode = NameMode.ClassName;
+    private static NameAlign nameAlign = NameAlign.Center;
     private static ArrayList<Branch> branches = new ArrayList<>();
     private static ArrayList<String> blocked = new ArrayList<>();
 
@@ -78,6 +84,16 @@ public class Twig
     public static NameMode getNameMode()
     {
         return nameMode;
+    }
+
+    public static void setNameAlign(NameAlign mode)
+    {
+        nameAlign = mode;
+    }
+
+    public static NameAlign getNameAlign()
+    {
+        return nameAlign;
     }
 
     private Twig()
