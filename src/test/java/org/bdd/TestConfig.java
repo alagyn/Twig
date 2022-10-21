@@ -3,6 +3,7 @@ package org.bdd;
 import org.bdd.twig.Twig;
 import org.bdd.twig.TwigConfig;
 import org.bdd.twig.Twig.Level;
+import org.bdd.twig.Twig.NameMode;
 import org.bdd.twig.branch.Branch;
 import org.bdd.twig.branch.StreamBranch;
 
@@ -18,6 +19,7 @@ public class TestConfig implements TwigConfig
         Twig.addBranch(b);
         Twig.setLevel(Level.Trace);
         Twig.addBlock("blockedLog");
+        Twig.setNameMode(NameMode.ShortPath);
     }
 
 }

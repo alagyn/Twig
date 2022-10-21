@@ -29,7 +29,7 @@ public class TestLog
 
     public static void main(String[] args)
     {
-        Logger log = LoggerFactory.getLogger("testLogger");
+        Logger log = LoggerFactory.getLogger(TestLog.class.getName());
 
         if(!log.getClass().getName().equals(TwigLogger.class.getName()))
         {
@@ -63,7 +63,7 @@ public class TestLog
             log.warn("What's all this then", err);
         }
 
-        Logger blocked = LoggerFactory.getLogger("blockedLog.asdf");
+        Logger blocked = LoggerFactory.getLogger("blockedLog.asdf.Classname");
         blocked.info("This should not print");
         log.info("This should be fine");
 

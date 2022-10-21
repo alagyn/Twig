@@ -13,7 +13,13 @@ public class Twig
         Trace, Debug, Info, Warn, Error;
     }
 
+    public static enum NameMode
+    {
+        ClassName, ShortPath, None;
+    }
+
     private static Level loglevel = Level.Info;
+    private static NameMode nameMode = NameMode.ClassName;
     private static ArrayList<Branch> branches = new ArrayList<>();
     private static ArrayList<String> blocked = new ArrayList<>();
 
@@ -62,6 +68,16 @@ public class Twig
         default:
             return level.toString();
         }
+    }
+
+    public static void setNameMode(NameMode mode)
+    {
+        nameMode = mode;
+    }
+
+    public static NameMode getNameMode()
+    {
+        return nameMode;
     }
 
     private Twig()
