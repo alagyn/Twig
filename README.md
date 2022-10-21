@@ -117,7 +117,7 @@ Twig format string variables are surrounded with curly brackets and contain a ca
     * `Warn`: `yellow`
     * `Error`: `red`
 
-### Timestamp formatting
+### Timestamp Formatting
 Twig timestamps are formatted per branch and accept `java.time.format.DateTimeFormatter` format strings.
 
 ```java
@@ -125,3 +125,21 @@ Branch b = new StreamBranch(System.out, "{event.time} {event.message}\n");
 b.setTimeFormat("dd-MM-yyyy kk:mm:ss");
 Twig.addBranch(b);
 ```
+
+### Logger Name Formatting
+The typical paradigm for Java logger names is to use the full class name.  
+E.G. `org.bdd.testPackage.TestClass` via
+```java
+Logger log = LoggerFactory.getLogger(TestClass.getClass().getName());
+```
+
+Twig offers three methods of presenting these names in your logs (with `{event.name}`)
+Set the mode with:
+```java
+Twig.setNameMode(NameMode.ShortPath)
+```
+This defaults to the `ClassName` mode.
+
+`ClassName`: Print only the classname, E.G. `TestClass`
+`ShortPath`: Shorten each package name to its first letter, E.G. `o.b.t.TestClass`
+`None`: User the full name as-is
