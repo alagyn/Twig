@@ -1,4 +1,5 @@
-# Twig
+<img alt="Twig Logo" src="docs/TwigLogoCircleCleared.png" height="200"/>
+
 A tiny logging backend for [SLF4J](https://www.slf4j.org/manual.html)
 
 This project came about simply to spite the terribly over-complicated logging libraries like Log4J,
