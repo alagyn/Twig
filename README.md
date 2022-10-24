@@ -158,3 +158,10 @@ This defaults to the `Center` mode.
 Options: `Left`, `Right`, `Center`, `None`  
 Setting the alignment to `None` disables padding
 
+### Blocking loggers
+Sometimes you only want to see your own logs. Add a log block to stop all logs of level Info or below.
+```java
+Twig.addBlock("org.otherPackage");
+```
+
+This will stop all loggers with names that start with the passed string.

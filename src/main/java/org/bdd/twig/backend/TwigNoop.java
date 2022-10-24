@@ -1,16 +1,13 @@
 package org.bdd.twig.backend;
 
-import org.slf4j.Logger;
 import org.slf4j.Marker;
 
-public class TwigNoop implements Logger
+public class TwigNoop extends TwigLogger
 {
-
-    public final String name;
 
     public TwigNoop(String name)
     {
-        this.name = name;
+        super(name);
     }
 
     @Override
@@ -64,62 +61,6 @@ public class TwigNoop implements Logger
     }
 
     @Override
-    public void error(String arg0)
-    {
-    }
-
-    @Override
-    public void error(String arg0, Object arg1)
-    {
-    }
-
-    @Override
-    public void error(String arg0, Object... arg1)
-    {
-    }
-
-    @Override
-    public void error(String arg0, Throwable arg1)
-    {
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1)
-    {
-    }
-
-    @Override
-    public void error(String arg0, Object arg1, Object arg2)
-    {
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Object arg2)
-    {
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Object... arg2)
-    {
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Throwable arg2)
-    {
-    }
-
-    @Override
-    public void error(Marker arg0, String arg1, Object arg2, Object arg3)
-    {
-    }
-
-    @Override
-    public String getName()
-    {
-        return name;
-    }
-
-    @Override
     public void info(String arg0)
     {
     }
@@ -147,13 +88,11 @@ public class TwigNoop implements Logger
     @Override
     public void info(String arg0, Object arg1, Object arg2)
     {
-
     }
 
     @Override
     public void info(Marker arg0, String arg1, Object arg2)
     {
-
     }
 
     @Override
@@ -192,14 +131,14 @@ public class TwigNoop implements Logger
     public boolean isErrorEnabled()
     {
 
-        return false;
+        return true;
     }
 
     @Override
     public boolean isErrorEnabled(Marker arg0)
     {
 
-        return false;
+        return true;
     }
 
     @Override
@@ -219,7 +158,6 @@ public class TwigNoop implements Logger
     @Override
     public boolean isTraceEnabled()
     {
-
         return false;
     }
 
@@ -234,14 +172,14 @@ public class TwigNoop implements Logger
     public boolean isWarnEnabled()
     {
 
-        return false;
+        return true;
     }
 
     @Override
     public boolean isWarnEnabled(Marker arg0)
     {
 
-        return false;
+        return true;
     }
 
     @Override
@@ -303,65 +241,4 @@ public class TwigNoop implements Logger
     {
 
     }
-
-    @Override
-    public void warn(String arg0)
-    {
-
-    }
-
-    @Override
-    public void warn(String arg0, Object arg1)
-    {
-
-    }
-
-    @Override
-    public void warn(String arg0, Object... arg1)
-    {
-
-    }
-
-    @Override
-    public void warn(String arg0, Throwable arg1)
-    {
-
-    }
-
-    @Override
-    public void warn(Marker arg0, String arg1)
-    {
-
-    }
-
-    @Override
-    public void warn(String arg0, Object arg1, Object arg2)
-    {
-
-    }
-
-    @Override
-    public void warn(Marker arg0, String arg1, Object arg2)
-    {
-
-    }
-
-    @Override
-    public void warn(Marker arg0, String arg1, Object... arg2)
-    {
-
-    }
-
-    @Override
-    public void warn(Marker arg0, String arg1, Throwable arg2)
-    {
-
-    }
-
-    @Override
-    public void warn(Marker arg0, String arg1, Object arg2, Object arg3)
-    {
-
-    }
-
 }

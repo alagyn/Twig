@@ -66,6 +66,7 @@ public class TestLog
         Logger blocked = LoggerFactory.getLogger("blockedLog.asdf.Classname");
         blocked.info("This should not print");
         log.info("This should be fine");
+        blocked.warn("This, however, will print");
 
         log.info("Hmmmmmm");
 
