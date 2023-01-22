@@ -26,7 +26,7 @@ public class TwigFormat
 
     public static void updateLongestName(int len)
     {
-        longestName = Math.max(len, longestName);
+        longestName = Math.min(Math.max(len, longestName), Twig.getMaxNameLen());
     }
 
     private static interface FmtObj
@@ -126,7 +126,7 @@ public class TwigFormat
     private static String alignCenter(String in)
     {
         int diff = longestName - in.length();
-        if(diff == 0)
+        if(diff <= 0)
         {
             return in;
         }
@@ -153,7 +153,7 @@ public class TwigFormat
     private static String alignLeft(String in)
     {
         int diff = longestName - in.length();
-        if(diff == 0)
+        if(diff <= 0)
         {
             return in;
         }

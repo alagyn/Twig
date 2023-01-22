@@ -26,6 +26,7 @@ public class Twig
     private static Level loglevel = Level.Info;
     private static NameMode nameMode = NameMode.ClassName;
     private static NameAlign nameAlign = NameAlign.Center;
+    private static int maxNameLen = 20;
     private static ArrayList<Branch> branches = new ArrayList<>();
     private static ArrayList<String> blocked = new ArrayList<>();
 
@@ -94,6 +95,16 @@ public class Twig
     public static NameAlign getNameAlign()
     {
         return nameAlign;
+    }
+
+    public static int getMaxNameLen()
+    {
+        return maxNameLen;
+    }
+
+    public static void setMaxNameLen(int len)
+    {
+        maxNameLen = len;
     }
 
     private Twig()
