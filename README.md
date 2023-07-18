@@ -1,4 +1,4 @@
-<img alt="Twig Logo" src="docs/TwigLogoCircleCleared.png" height="200"/>
+<img alt="Twig Logo" src="docs/TwigLogoCircleCleared.png" height="200" align="right"/>
 
 A tiny logging backend for [SLF4J](https://www.slf4j.org/manual.html)
 
